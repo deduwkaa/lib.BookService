@@ -4,6 +4,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using BLL.Abstractions;
+using BLL.DTO;
 using DAL.Models;
 using DAL.Repositories;
 
@@ -35,31 +37,14 @@ namespace BLL
 
             return BookDTOs;
         }
+
         public async Task<BookDTO> GetBookById(Guid id)
         {
             var book = await _bookRepository.GetById(id).ConfigureAwait(false);
             var dto = _mapper.Map(book);
             return dto;
         }
-        public async Task<TokenInfoDTO> CheckLogin(string Email, string Password)
-        {
-            Expression<Func<Book, bool>> filter = x => x.Email == Email;
-            var result = await _bookRepository.Get(filter);
-            var book = _mapper.Map(result.FirstOrDefault());
-            if (book == null)
-            {
-                return new TokenInfoDTO(Guid.Empty, null);
-            }
-            else if (book.Password != Password)
-            {
-                return new TokenInfoDTO(Guid.Empty, null);
-            }
-            else
-            {
-                var token = AuthService.GenerateJSONWebToken(_config, book);
-                return new TokenInfoDTO(book.Id, token);
-            }
-        }
+
         public async Task UpdateBook(BookDTO book)
         {
             await _bookRepository.Update(_mapper.Map(book)).ConfigureAwait(false);

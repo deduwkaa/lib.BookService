@@ -11,6 +11,7 @@ public class MapperProfiler : IMapperProfiler
         var tempBook = new Book();
         tempBook.Id = bookDTO.Id;
         tempBook.CreatedAt = bookDTO.CreatedAt;
+        tempBook.Title = bookDTO.Title;
         tempBook.Author = bookDTO.Author;
         tempBook.Description = bookDTO.Description;
         tempBook.FileUrl = bookDTO.FileUrl;
@@ -25,6 +26,7 @@ public class MapperProfiler : IMapperProfiler
         var tempBook = new BookDTO();
         tempBook.Id = book.Id;
         tempBook.CreatedAt = book.CreatedAt;
+        tempBook.Title= book.Title;
         tempBook.Author = book.Author;
         tempBook.Description = book.Description;
         tempBook.FileUrl = book.FileUrl;
@@ -42,6 +44,7 @@ public class MapperProfiler : IMapperProfiler
         {
             var tempBook = new BookDTO();
             tempBook.Id = book.Id;
+            tempBook.Title = book.Title;
             tempBook.CreatedAt = book.CreatedAt;
             tempBook.Author = book.Author;
             tempBook.Description = book.Description;
@@ -49,7 +52,7 @@ public class MapperProfiler : IMapperProfiler
             tempBook.Genre = book.Genre;
             tempBook.PublicationYear = book.PublicationYear;
 
-            return bookDTOs;
+             bookDTOs.Add(tempBook);
         }
         return bookDTOs;
     }
@@ -59,14 +62,17 @@ public class MapperProfiler : IMapperProfiler
 
         foreach (var book in bookDTOs)
         {
-            var tempBook = new BookDTO();
+            var tempBook = new Book();
             tempBook.Id = book.Id;
+            tempBook.Title = book.Title;
             tempBook.CreatedAt = book.CreatedAt;
             tempBook.Author = book.Author;
             tempBook.Description = book.Description;
             tempBook.FileUrl = book.FileUrl;
             tempBook.Genre = book.Genre;
             tempBook.PublicationYear = book.PublicationYear;
+
+            books.Add(tempBook);
         }
 
         return books;
