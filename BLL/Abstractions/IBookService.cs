@@ -11,7 +11,10 @@ namespace BLL.Abstractions
     {
         public Task UpdateBook(BookDTO book);
         public Task<BookDTO> GetBookById(Guid id);
-        public  Task<ICollection<BookDTO>> GetAllBooks();
+        public Task<ICollection<BookDTO>> GetAllBooks();
+        public Task<ICollection<BookDTO>> GetBooksByYear(int year);
+        public Task<ICollection<BookDTO>> GetBooksByAuthor(string author);
+        public Task<ICollection<BookDTO>> GetBooksByGenre(string genre);
         public Task DeleteBook(Guid id);
         public Task AddBook(BookDTO book);
     }

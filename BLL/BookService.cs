@@ -26,6 +26,29 @@ namespace BLL
         {
             await _bookRepository.Create(_mapper.Map(book)).ConfigureAwait(false);
         }
+
+        public async Task<ICollection<BookDTO>> GetBooksByGenre(string genre)
+        {
+            var books = await _bookRepository.Get(b => b.Genre == genre).ConfigureAwait(false);
+            var BookDTOs = _mapper.Map(books);
+
+            return BookDTOs;
+        }
+        public async Task<ICollection<BookDTO>> GetBooksByAuthor(string author)
+        {
+            var books = await _bookRepository.Get(b => b.Author == author).ConfigureAwait(false);
+            var BookDTOs = _mapper.Map(books);
+
+            return BookDTOs;
+        }
+        public async Task<ICollection<BookDTO>> GetBooksByYear(int year)
+        {
+            var books = await _bookRepository.Get(b => b.PublicationYear == year).ConfigureAwait(false);
+            var BookDTOs = _mapper.Map(books);
+
+            return BookDTOs;
+        }
+
         public async Task DeleteBook(Guid id)
         {
             await _bookRepository.Delete(id).ConfigureAwait(false);

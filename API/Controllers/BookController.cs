@@ -37,7 +37,50 @@ namespace API.Controllers
                 return StatusCode(500, "An error occurred while processing your request.");
             }
         }
+        [Authorize]
+        [HttpGet("genre/{genre}")]
+        public async Task<IActionResult> GetBooksByGenre(string genre)
+        {
+            try
+            {
+                var list = await _bookService.GetBooksByGenre(genre);
+                return Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "An error occurred while processing your request.");
+            }
+        }
 
+        [Authorize]
+        [HttpGet("author/{author}")]
+        public async Task<IActionResult> GetBooksByAuthor(string author)
+        {
+            try
+            {
+                var list = await _bookService.GetBooksByAuthor(author);
+                return Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "An error occurred while processing your request.");
+            }
+        }
+
+        [Authorize]
+        [HttpGet("year/{year}")]
+        public async Task<IActionResult> GetBooksByYear(int year)
+        {
+            try
+            {
+                var list = await _bookService.GetBooksByYear(year);
+                return Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "An error occurred while processing your request.");
+            }
+        }
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> PostBooks(BookDTO user)
